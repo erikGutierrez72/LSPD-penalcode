@@ -22,6 +22,9 @@
   const resultTitle = $("resultTitle");
   const resultCount = $("resultCount");
   const searchInput = $("searchInput");
+  function updateSearchClear() {
+    searchClear.classList.toggle("show", state.query.length > 0);
+  }
 
   const citationPad = $("citationPad");
   const citationItems = $("citationItems");
@@ -225,10 +228,19 @@
       : "Tambah ke Kutipan";
   });
 
-  // ---------------- search ----------------
+ // ---------------- search ----------------
   searchInput.addEventListener("input", (e) => {
     state.query = e.target.value;
     renderList();
+    updateSearchClear();
+  });
+ 
+  searchClear.addEventListener("click", () => {
+    searchInput.value = "";
+    state.query = "";
+    renderList();
+    updateSearchClear();
+    searchInput.focus();
   });
 
   // ---------------- citation pad open/close (mobile) ----------------
@@ -261,4 +273,5 @@
   renderSidebar();
   renderList();
   renderCitation();
+  updateSearchClear();
 })();

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LSPD // Penal Code Terminal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ============ TOP BAR ============ -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <div class="brand-mark">LSPD</div>
+      <div class="brand-text">
+        <span class="brand-title">Penal Code Terminal</span>
+        <span class="brand-sub">San Andreas Statutes Lookup</span>
+      </div>
+    </div>
+
+    <div class="search-wrap">
+      <span class="search-prompt">&gt;</span>
+      <input
+        id="searchInput"
+        class="search-input"
+        type="text"
+        placeholder="cari nomor pasal atau nama pelanggaran..."
+        autocomplete="off"
+      >
+      <span class="search-cursor"></span>
+    </div>
+
+    <button class="citation-toggle" id="citationToggle" aria-label="Buka daftar kutipan">
+      <span class="citation-toggle-icon">▤</span>
+      <span class="citation-toggle-count" id="citationCount">0</span>
+    </button>
+  </header>
+
+  <div class="body-grid">
+
+    <!-- ============ SIDEBAR CATEGORY ============ -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-label">Filter Kategori</div>
+      <ul class="cat-list" id="catList"></ul>
+    </nav>
+
+    <!-- ============ MAIN LIST ============ -->
+    <main class="main">
+      <div class="main-head">
+        <div class="main-head-title" id="resultTitle">Semua Pasal</div>
+        <div class="main-head-count" id="resultCount"></div>
+      </div>
+
+      <div class="table-head">
+        <span class="col col-code">Kode</span>
+        <span class="col col-name">Pelanggaran</span>
+        <span class="col col-class">Klasifikasi</span>
+        <span class="col col-time">Waktu</span>
+        <span class="col col-fine">Denda</span>
+      </div>
+
+      <div class="entry-list" id="entryList"></div>
+
+      <div class="empty-state" id="emptyState" hidden>
+        <div class="empty-state-code">404</div>
+        <p>Tidak ada pasal yang cocok dengan pencarian ini.</p>
+      </div>
+    </main>
+
+    <!-- ============ CITATION PAD (desktop side / mobile sheet) ============ -->
+    <aside class="citation-pad" id="citationPad">
+      <div class="citation-head">
+        <span>Lembar Kutipan</span>
+        <button class="citation-close" id="citationClose" aria-label="Tutup">✕</button>
+      </div>
+
+      <div class="citation-items" id="citationItems">
+        <div class="citation-empty" id="citationEmpty">
+          Belum ada pasal dipilih.<br>Ketuk sebuah pasal untuk menambahkannya.
+        </div>
+      </div>
+
+      <div class="citation-footer">
+        <div class="citation-total-row">
+          <span>Total Waktu</span>
+          <span id="totalTime">0 menit</span>
+        </div>
+        <div class="citation-total-row citation-total-fine">
+          <span>Total Denda</span>
+          <span id="totalFine">$0</span>
+        </div>
+        <button class="btn-reset" id="resetBtn">Reset Semua</button>
+      </div>
+    </aside>
+
+  </div>
+
+  <div class="scrim" id="scrim"></div>
+</div>
+
+<!-- ============ DETAIL MODAL ============ -->
+<div class="modal" id="detailModal" hidden>
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose" aria-label="Tutup">✕</button>
+    <div class="modal-code" id="modalCode"></div>
+    <h2 class="modal-name" id="modalName"></h2>
+    <div class="modal-meta">
+      <span class="badge" id="modalClass"></span>
+      <span class="modal-meta-item" id="modalTitle"></span>
+    </div>
+    <p class="modal-desc" id="modalDesc"></p>
+    <div class="modal-stats">
+      <div class="modal-stat">
+        <span class="modal-stat-label">Waktu</span>
+        <span class="modal-stat-value" id="modalTime"></span>
+      </div>
+      <div class="modal-stat">
+        <span class="modal-stat-label">Denda</span>
+        <span class="modal-stat-value" id="modalFine"></span>
+      </div>
+    </div>
+    <button class="btn-add" id="modalAdd">Tambah ke Kutipan</button>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
